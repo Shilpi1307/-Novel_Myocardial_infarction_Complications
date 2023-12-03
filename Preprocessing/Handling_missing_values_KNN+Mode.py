@@ -24,43 +24,24 @@ from sklearn.feature_selection import SelectFromModel
 import statistics as st
 from google.colab import files
 
-
-
 file = files.upload()
-
 df = pd.read_csv("Mi (2).csv")
-df
-
-df.drop(['IBS_NASL','KFK_BLOOD','ID','S_AD_KBRIG','D_AD_KBRIG'], axis = 1, inplace = True)
-df
 
 a = df.columns
-a
-
+# numerical features
 if [col for col in df.columns if len(df[col].unique()) > 10]:
    num_features = [col for col in df.columns if len(df[col].unique()) > 10]
+num_features_df = df[num_features]
 
-num_features
-
+# categorical fetures
 if [col for col in df.columns if len(df[col].unique())<=10]:
    cat_features = [col for col in df.columns if len(df[col].unique())<=10]
-
-cat_features
-
 cat_features_df = df[cat_features]
 
 cat_imputed_df = cat_features_df.copy()
 for i, col in enumerate(cat_features):
         cat_imputed_df[col].fillna(value=st.mode(cat_imputed_df[col]), inplace=True)
 cat_imputed_df
-
-if [col for col in df.columns if len(df[col].unique()) > 10]:
-   num_features = [col for col in df.columns if len(df[col].unique()) > 10]
-
-num_features
-
-num_features_df = df[num_features]
-num_features_df
 
 num_imputed_df = num_features_df.copy()
 imputer = KNNImputer(n_neighbors=15, weights='uniform')
@@ -72,36 +53,10 @@ for i, col in enumerate(num_features):
 num_imputed_df
 
 imputed_df = pd.concat([num_imputed_df,cat_imputed_df],axis=1)
-imputed_df
 
-"""# Dropped features from dataset for time zone 1
-Relapse of the pain in the first hours of the hospital period **(R_AB_1_n)**
-
-Relapse of the pain in the second day of the hospital period **(R_AB_2_n)**
-
-Relapse of the pain in the third day of the hospital period **(R_AB_3_n)**
-
-Use of opioid drugs in the ICU in the second day of the hospital period **(NA_R_2_n)**
-
-Use of opioid drugs in the ICU in the third day of the hospital period **(NA_R_3_n)**
-
-Use of NSAIDs in the ICU in the first hours of the hospital period **(NOT_NA_1_n)**
-
-Use of NSAIDs in the ICU in the second day of the hospital period**(NOT_NA_2_n)**
-
-Use of NSAIDs in the ICU in the third day of the hospital period**(NOT_NA_3_n)**
-
-"""
-
-imputed_df.drop(['R_AB_1_n','R_AB_2_n','R_AB_3_n','NA_R_2_n','NA_R_3_n','NOT_NA_1_n','NOT_NA_2_n','NOT_NA_3_n'], axis = 1, inplace = True)
-
-imputed_df
-
-# imputed_df.to_csv("imputed_df.csv",index = False)
-
-# num_imputed_df.to_csv("num_imputed_df.csv",index = False)
-
-# cat_imputed_df.to_csv("cat_imputed_df.csv",index = False)
+imputed_df.to_csv("imputed_df.csv",index = False)
+num_imputed_df.to_csv("num_imputed_df.csv",index = False)
+cat_imputed_df.to_csv("cat_imputed_df.csv",index = False)
 
 df_orig = pd.DataFrame(imputed_df)
 
