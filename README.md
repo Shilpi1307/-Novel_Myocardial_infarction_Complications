@@ -4,11 +4,11 @@ Myocardial Infarction (MI), also known as a heart attack, is a serious condition
 The course of MI can vary from person to person. Some people have no complications, while others develop complications that can worsen the condition or even lead to death. Even experienced doctors cannot always predict who will develop complications. However, it is always crucial for phenotype patients to provide them with a better individual treatment predicting complications of myocardial infarction in order to timely carry out the necessary preventive measures is an important task.<br>
 The significance of this study lies in its potential to improve individualized treatment and predictive measures for patients with MI complications. By identifying distinct phenotypes, clinicians can tailor treatment strategies based on the specific characteristics and risks associated with each cluster. This information can also be valuable for future clinical trials and the development of targeted intervention.
 ### Dataset
-1.https://archive.ics.uci.edu/dataset/579/myocardial+infarction+complications.
+https://archive.ics.uci.edu/dataset/579/myocardial+infarction+complications.
 ### Functioning of the models
 For this research, I have used various machine learning models.<br>
 There are four folders in the repository :
-1. Models: Contains the models implemented on the dataset.
+1. Clustering: Contains the models implemented on the dataset.
 2. Images: Contains images of the clusters, elbow curve,variation of clusters w.r.t each features  and the preprocessing images .
 3. Plots: Contains the code for plots using matplotlib and plotly to plot the clusters and te visualisation of datasets.
 4. Preprocessing: contains the presprocessing of the datasets such that handling missing values and outliers.
